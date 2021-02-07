@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
+import com.laioffer.tinnews.model.Article;
 import com.laioffer.tinnews.model.NewsResponse;
 import com.laioffer.tinnews.repository.NewsRepository;
 
@@ -26,5 +27,10 @@ public class HomeViewModel extends ViewModel {
         // 相当于countryInput是土豆，repository::getTopHeadlines是传了一个function，相当于
         // 生产线，return的是薯片，放到LiveData的盒子里
     }
+
+    public void setFavoriteArticleInput(Article article) {
+        repository.favoriteArticle(article);
+    }
+
 }
 

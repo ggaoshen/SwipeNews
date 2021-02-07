@@ -87,6 +87,7 @@ public class HomeFragment extends Fragment implements CardStackListener {
         CardSwipeAdapter swipeAdapter = new CardSwipeAdapter();
         layoutManager = new CardStackLayoutManager(requireContext(), this); // manages how cards are stacked. from library
         // 2nd argument this is to subscribe a event listener, this=CardStackListener since HomeFragment implements it
+        // 不用this, 用new CardStackListener
         layoutManager.setStackFrom(StackFrom.Top); // set cards stack from top
         binding.homeCardStackView.setLayoutManager(layoutManager); //
         binding.homeCardStackView.setAdapter(swipeAdapter);
@@ -104,10 +105,10 @@ public class HomeFragment extends Fragment implements CardStackListener {
         viewModel.setCountryInput("us");
         viewModel
                 .getTopHeadlines()
-                .observe(
+                .observe( // VM observe，adapter提供数据
                         getViewLifecycleOwner(),
                         newsResponse -> {
-                            if (newsResponse != null) { // async call
+                            if (newsResponse != null) { // async
 //                                Log.d("HomeFragment", newsResponse.toString());
                                 articles = newsResponse.articles;
                                 swipeAdapter.setArticles(articles);
@@ -137,6 +138,8 @@ public class HomeFragment extends Fragment implements CardStackListener {
             Log.d("CardStackView", "Unliked " + layoutManager.getTopPosition());
         } else if (direction == Direction.Right) {
             Log.d("CardStackView", "Liked "  + layoutManager.getTopPosition());
+            Article article = articles.get(layoutManager.getTopPosition() -1);
+            viewModel.setFavoriteArticleInput(article);
         }
 
     }
