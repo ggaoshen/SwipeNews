@@ -44,30 +44,6 @@ public class HomeFragment extends Fragment implements CardStackListener {
         // Required empty public constructor
     }
 
-//    /**
-//     * Use this factory method to create a new instance of
-//     * this fragment using the provided parameters.
-//     * @return A new instance of fragment SaveFragment.
-//     */
-//    // TODO: Rename and change types and number of parameters
-//    public static HomeFragment newInstance(String param1, String param2) {
-//        HomeFragment fragment = new HomeFragment();
-//        Bundle args = new Bundle();
-////        args.putString(ARG_PARAM1, param1);
-////        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -77,7 +53,6 @@ public class HomeFragment extends Fragment implements CardStackListener {
         return binding.getRoot();
 
     }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -102,6 +77,8 @@ public class HomeFragment extends Fragment implements CardStackListener {
         NewsRepository repository = new NewsRepository(getContext());
         viewModel = new ViewModelProvider(this, new NewsViewModelFactory(repository))
                 .get(HomeViewModel.class);
+        // VM creation alternatively: viewModel = new HomeViewModel(repository);
+        //
         viewModel.setCountryInput("us");
         viewModel
                 .getTopHeadlines()
