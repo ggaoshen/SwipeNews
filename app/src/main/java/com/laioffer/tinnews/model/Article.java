@@ -4,10 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Article {
+public class Article implements Serializable {
 //    Source source; // 不好存，不重要
     public String author;
     public String title;
