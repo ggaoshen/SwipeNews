@@ -25,12 +25,8 @@ import com.yuyakaido.android.cardstackview.StackFrom;
 import com.yuyakaido.android.cardstackview.SwipeAnimationSetting;
 
 import java.util.List;
+import java.util.Locale;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class HomeFragment extends Fragment implements CardStackListener {
     // CardStackListener interface to save liked articles to db
 
@@ -78,8 +74,12 @@ public class HomeFragment extends Fragment implements CardStackListener {
         viewModel = new ViewModelProvider(this, new NewsViewModelFactory(repository))
                 .get(HomeViewModel.class);
         // VM creation alternatively: viewModel = new HomeViewModel(repository);
-        //
-        viewModel.setCountryInput("us");
+
+        // set country
+        // viewModel.setCountryInput("us");
+        String countryCode = Locale.getDefault().getCountry();
+        System.out.println("Country code: " + countryCode);
+        viewModel.setCountryInput(countryCode); // use system language
         viewModel
                 .getTopHeadlines()
                 .observe( // VM observe，adapter提供数据
